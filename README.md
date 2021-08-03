@@ -1,0 +1,1 @@
+# This project is slack clone project made using React Redux and Firebase
