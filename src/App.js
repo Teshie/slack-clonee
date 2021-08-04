@@ -4,6 +4,7 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import styled from "styled-components";
 import Sidebar from "./Components/SideBar/Sidebar";
+import Chat from "./Components/Chat/Chat";
 
 const AppBody = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ function App() {
             <Sidebar />
             <Switch>
               <Route path="/" exact>
-                {/* <Chat/> */}
+                <Chat />
               </Route>
             </Switch>
           </AppBody>
