@@ -24,7 +24,7 @@ const ChatInputContainer = styled.div`
     display: none;
   }
 `;
-const ChatInput = ({ channelName, channelId }) => {
+const ChatInput = ({ channelName, channelId, chatRef }) => {
   const [input, setInput] = useState("");
   const sendMessage = (e) => {
     e.preventDefault(); // prevents refresh
@@ -38,6 +38,10 @@ const ChatInput = ({ channelName, channelId }) => {
       userImage:
         "https://i1.rgstatic.net/ii/profile.image/916106868973571-1595428306676_Q512/Teshome-Ayechiluhem.jpg",
     });
+
+    chatRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
     setInput("");
   };
 
@@ -47,7 +51,7 @@ const ChatInput = ({ channelName, channelId }) => {
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={`Messege #ROOM`}
+          placeholder={`Messege #${channelName}`}
         />
         <Button hidden type="submit" onClick={sendMessage}>
           SENDS
