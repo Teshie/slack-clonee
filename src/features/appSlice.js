@@ -1,13 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  name: "app",
-  roomId: null,
-};
-
 export const appSlice = createSlice({
   name: "app",
-  initialState,
+  initialState: {
+    roomId: null,
+  },
 
   reducers: {
     enterRoom: (state, action) => {

@@ -3,6 +3,8 @@ import { AccessTime, HelpOutline } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { Search } from "@material-ui/icons";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../SideBar/database";
 const HeaderContainer = styled.div`
   display: flex;
   position: fixed;
@@ -62,12 +64,16 @@ const HeaderRight = styled.div`
 `;
 
 const Header = () => {
+  const [user] = useAuthState(auth);
+
   return (
     <div>
       <HeaderContainer>
         <HeaderLeft>
           <HeaderAvatar
-          //TODO ADD ONCICK
+            onClick={() => auth.signOut()}
+            alt={user?.displayName}
+            src={user?.photoURL}
           />
           <AccessTime />
         </HeaderLeft>

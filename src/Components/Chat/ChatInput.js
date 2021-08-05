@@ -1,8 +1,9 @@
 import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { db } from "../SideBar/database";
+import { auth, db } from "../SideBar/database";
 import firebase from "firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 const ChatInputContainer = styled.div`
   border-radius: 20px;
 
@@ -25,6 +26,7 @@ const ChatInputContainer = styled.div`
   }
 `;
 const ChatInput = ({ channelName, channelId, chatRef }) => {
+  const [user] = useAuthState(auth);
   const [input, setInput] = useState("");
   const sendMessage = (e) => {
     e.preventDefault(); // prevents refresh
@@ -35,8 +37,7 @@ const ChatInput = ({ channelName, channelId, chatRef }) => {
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       user: "Teshie Yalew",
-      userImage:
-        "https://i1.rgstatic.net/ii/profile.image/916106868973571-1595428306676_Q512/Teshome-Ayechiluhem.jpg",
+      userImage: user.photoURL,
     });
 
     chatRef.current.scrollIntoView({
