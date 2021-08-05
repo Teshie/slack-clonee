@@ -13,9 +13,10 @@ import {
   PeopleAlt,
 } from "@material-ui/icons";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
-import { db } from "./database";
+import { auth, db } from "./database";
 import SidebarOption from "./SidebarOption";
 
 const SidebarContainer = styled.div`
@@ -66,7 +67,7 @@ const SidebarInfo = styled.div`
 
 const Sidebar = () => {
   const [channels, loading, error] = useCollection(db.collection("rooms"));
-
+  const [user] = useAuthState(auth);
   return (
     <SidebarContainer>
       <SidebarHeader>
@@ -74,7 +75,7 @@ const Sidebar = () => {
           <h2>TESHIE FAM HQ</h2>
           <h3>
             <FiberManualRecord />
-            Teshie
+            {user?.displayName}
           </h3>
         </SidebarInfo>
         <Create />
